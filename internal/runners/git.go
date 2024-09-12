@@ -74,7 +74,7 @@ func (git_runner *GitRunner) Push() error {
 		return err
 	}
 
-	log.Print("\nSuccessfully pushed changes!")
+	log.Print("Successfully pushed changes!")
 
 	return nil
 }
