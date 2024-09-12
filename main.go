@@ -7,7 +7,7 @@ import (
 
 func main() {
 	git_runner := &runners.GitRunner{}
-	err := git_runner.StageAndCommit("Run add first")
+	err := git_runner.StageAndCommit("Reorganize")
 	if err != nil {
 		log.Fatal(err)
 	}
