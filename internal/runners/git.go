@@ -31,6 +31,13 @@ func (git_runner *GitRunner) StageAndCommit(message string) error {
 
 	log.Print("Changes committed.")
 
+	status, err := git_runner.Status()
+	if err != nil {
+		return err
+	}
+
+	log.Printf("Git Status:\n%s", status)
+
 	return nil
 }
 
@@ -39,9 +46,11 @@ func (git_runner *GitRunner) StageAndCommit(message string) error {
 // TODO: Should have specific error types for each git error possible?
 func (g *GitRunner) Add(path string) error {
 	var out bytes.Buffer
+
 	cmd := exec.Command("git", "add", path)
 	cmd.Stdout = &out
 	err := cmd.Run()
+
 	if err != nil {
 		return err
 	}
@@ -63,6 +72,7 @@ func (g *GitRunner) Commit(message string) (string, error) {
 	var out bytes.Buffer
 	cmd.Stdout = &out
 	err := cmd.Run()
+
 	if err != nil {
 		// TODO: Handle errors.
 		return "", err
@@ -75,10 +85,26 @@ func (g *GitRunner) Commit(message string) (string, error) {
 // Returns the output as a string or an error.
 // TODO: Should have specific error types for each git error possible?
 func (g *GitRunner) Diff() (string, error) {
-	cmd := exec.Command("git", "diff")
 	var out bytes.Buffer
+
+	cmd := exec.Command("git", "diff")
 	cmd.Stdout = &out
 	err := cmd.Run()
+
+	if err != nil {
+		return "", err
+	}
+
+	return out.String(), nil
+}
+
+func (git_runner *GitRunner) Status() (string, error) {
+	var out bytes.Buffer
+
+	cmd := exec.Command("git", "status")
+	cmd.Stdout = &out
+	err := cmd.Run()
+
 	if err != nil {
 		return "", err
 	}

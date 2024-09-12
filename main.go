@@ -7,7 +7,7 @@ import (
 
 func main() {
 	git_runner := &runners.GitRunner{}
-	err := git_runner.StageAndCommit("Added StageAndCommit func to stage changes and run git commit.")
+	err := git_runner.StageAndCommit("Added GitRunner.Status and made StageAndCommit output the status.")
 	if err != nil {
 		log.Fatal(err)
 	}
