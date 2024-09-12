@@ -66,6 +66,19 @@ func (g *GitRunner) Diff() (string, error) {
 	return out.String(), nil
 }
 
+func (git_runner *GitRunner) Push() error {
+	var cmd *exec.Cmd
+	err := cmd.Run()
+
+	if err != nil {
+		return err
+	}
+
+	log.Print("\nSuccessfully pushed changes!")
+
+	return nil
+}
+
 func (git_runner *GitRunner) StageAndCommit(message string) error {
 	// Stage all changes
 	err := git_runner.Add(".")
