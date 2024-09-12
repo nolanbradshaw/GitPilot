@@ -67,7 +67,7 @@ func (g *GitRunner) Diff() (string, error) {
 }
 
 func (git_runner *GitRunner) Push() error {
-	var cmd *exec.Cmd
+	cmd := exec.Command("git", "push")
 	err := cmd.Run()
 
 	if err != nil {
