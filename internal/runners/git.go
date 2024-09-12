@@ -10,8 +10,15 @@ import (
 type GitRunner struct{}
 
 func (git_runner *GitRunner) StageAndCommit(message string) error {
+	status, err := git_runner.Status()
+	if err != nil {
+		return err
+	}
+
+	log.Printf("%s\n", status)
+
 	// Stage all changes
-	err := git_runner.Add(".")
+	err = git_runner.Add(".")
 	if err != nil {
 		return err
 	}
@@ -31,13 +38,6 @@ func (git_runner *GitRunner) StageAndCommit(message string) error {
 	}
 
 	log.Print("Changes committed.")
-
-	status, err := git_runner.Status()
-	if err != nil {
-		return err
-	}
-
-	log.Printf("Git Status:\n%s", status)
 
 	return nil
 }
