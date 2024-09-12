@@ -10,20 +10,20 @@ import (
 type GitRunner struct{}
 
 func (git_runner *GitRunner) StageAndCommit(message string) error {
+	// Stage all changes
+	err := git_runner.Add(".")
+	if err != nil {
+		return err
+	}
+
+	log.Print("Staged all changes.")
+
 	status, err := git_runner.Status()
 	if err != nil {
 		return err
 	}
 
 	log.Printf("%s\n", status)
-
-	// Stage all changes
-	err = git_runner.Add(".")
-	if err != nil {
-		return err
-	}
-
-	log.Print("Staged all changes.")
 
 	// TODO: Use git diff as LLM prompt for commit message.
 	// git_diff, err := git_runner.Diff()
