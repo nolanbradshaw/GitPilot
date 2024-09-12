@@ -99,6 +99,9 @@ func (g *GitRunner) Diff() (string, error) {
 	return out.String(), nil
 }
 
+// Runs `git status`
+// Returns the output as a string or an error.
+// TODO: Should have specific error types for each git error possible?
 func (git_runner *GitRunner) Status() (string, error) {
 	var out bytes.Buffer
 
