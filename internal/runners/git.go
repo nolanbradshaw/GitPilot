@@ -37,6 +37,8 @@ func (g *GitRunner) Commit(message string) (string, error) {
 		cmd = exec.Command("git", "commit", "-m", message)
 	}
 
+	cmd.Dir, _ = os.Getwd()
+
 	var out bytes.Buffer
 	cmd.Stdout = &out
 	err := cmd.Run()
@@ -56,6 +58,7 @@ func (g *GitRunner) Diff() (string, error) {
 	var out bytes.Buffer
 
 	cmd := exec.Command("git", "diff")
+	cmd.Dir, _ = os.Getwd()
 	cmd.Stdout = &out
 	err := cmd.Run()
 
@@ -68,6 +71,7 @@ func (g *GitRunner) Diff() (string, error) {
 
 func (git_runner *GitRunner) Push() error {
 	cmd := exec.Command("git", "push")
+	cmd.Dir, _ = os.Getwd()
 	err := cmd.Run()
 
 	if err != nil {
