@@ -3,6 +3,7 @@ package runners
 import (
 	"bytes"
 	"log"
+	"os"
 	"os/exec"
 )
 
@@ -102,6 +103,7 @@ func (git_runner *GitRunner) Status() (string, error) {
 	var out bytes.Buffer
 
 	cmd := exec.Command("git", "status")
+	cmd.Dir, _ = os.Getwd()
 	cmd.Stdout = &out
 	err := cmd.Run()
 
