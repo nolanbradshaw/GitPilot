@@ -7,7 +7,7 @@ import (
 
 func main() {
 	git_runner := &runners.GitRunner{}
-	err := git_runner.StageAndCommit("Reorganize")
+	err := git_runner.StageAndCommit("Generated using GitPilot.")
 	if err != nil {
 		log.Fatal(err)
 	}
