@@ -12,10 +12,14 @@ type GitRunner struct{}
 // Stages files in the given path to be commited.
 // Returns an error if there is an issue running the command.
 // TODO: Should have specific error types for each git error possible?
-func (g *GitRunner) Add(path string) error {
+func (g *GitRunner) Add(path string, cmdDir *string) error {
 	var out bytes.Buffer
 
 	cmd := exec.Command("git", "add", path)
+	if cmdDir != nil {
+		cmd.Dir = *cmdDir
+	}
+
 	cmd.Stdout = &out
 	err := cmd.Run()
 
@@ -85,7 +89,7 @@ func (git_runner *GitRunner) Push() error {
 
 func (git_runner *GitRunner) StageAndCommit(message string) error {
 	// Stage all changes
-	err := git_runner.Add(".")
+	err := git_runner.Add(".", nil)
 	if err != nil {
 		return err
 	}
