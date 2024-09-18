@@ -10,7 +10,7 @@ import (
 func main() {
 	var rootCmd = &cobra.Command{
 		Use:   "git-pilot",
-		Short: "GitPilot is a command line tool for managing git repositories.",
+		Short: "GitPilot automates your git workflows.",
 	}
 
 	git_runner := &runners.GitRunner{}
